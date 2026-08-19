@@ -1,0 +1,1611 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>陈宇涵 · 个人简历与 AI 作品集</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        cyber: {
+                            bg: '#070a12',
+                            card: 'rgba(15, 23, 42, 0.75)',
+                            accent: '#f59e0b',
+                            accentLight: '#fbbf24',
+                            cyan: '#06b6d4',
+                            purple: '#a855f7',
+                            emerald: '#10b981'
+                        }
+                    },
+                    animation: {
+                        'pulse-glow': 'pulseGlow 3s infinite ease-in-out',
+                        'float': 'float 4s infinite ease-in-out',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@300;400;600;800&display=swap');
+
+        :root {
+            --accent: #f59e0b;
+            --accent-rgb: 245, 158, 11;
+            --accent-glow: rgba(245, 158, 11, 0.25);
+            --bg-base: #070a12;
+            --bg-card: rgba(15, 23, 42, 0.75);
+            --border-card: rgba(255, 255, 255, 0.1);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --font-mono: 'Fira Code', Consolas, monospace;
+        }
+
+        /* 1. 赛博金 (Cyber Gold) - 默认 */
+        .theme-cyber {
+            --accent: #f59e0b;
+            --accent-rgb: 245, 158, 11;
+            --accent-glow: rgba(245, 158, 11, 0.25);
+            --bg-base: #070a12;
+            --bg-card: rgba(15, 23, 42, 0.75);
+            --border-card: rgba(245, 158, 11, 0.2);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+
+        /* 2. 黑客绿 (Matrix Green) */
+        .theme-matrix {
+            --accent: #10b981;
+            --accent-rgb: 16, 185, 129;
+            --accent-glow: rgba(16, 185, 129, 0.3);
+            --bg-base: #02120a;
+            --bg-card: rgba(6, 30, 20, 0.85);
+            --border-card: rgba(16, 185, 129, 0.25);
+            --text-main: #ecfdf5;
+            --text-muted: #6ee7b7;
+        }
+
+        /* 3. 霓虹紫 (Neon Purple) */
+        .theme-neon {
+            --accent: #a855f7;
+            --accent-rgb: 168, 85, 247;
+            --accent-glow: rgba(168, 85, 247, 0.3);
+            --bg-base: #0f051d;
+            --bg-card: rgba(28, 15, 48, 0.8);
+            --border-card: rgba(168, 85, 247, 0.25);
+            --text-main: #faf5ff;
+            --text-muted: #c084fc;
+        }
+
+        /* 4. 深海蓝 (Ocean Cyan) */
+        .theme-ocean {
+            --accent: #06b6d4;
+            --accent-rgb: 6, 182, 212;
+            --accent-glow: rgba(6, 182, 212, 0.3);
+            --bg-base: #031329;
+            --bg-card: rgba(10, 32, 64, 0.8);
+            --border-card: rgba(6, 182, 212, 0.25);
+            --text-main: #f0f9ff;
+            --text-muted: #67e8f9;
+        }
+
+        /* 5. 极简白 (Light Minimalist) */
+        .theme-light {
+            --accent: #d97706;
+            --accent-rgb: 217, 119, 6;
+            --accent-glow: rgba(217, 119, 6, 0.15);
+            --bg-base: #f8fafc;
+            --bg-card: rgba(255, 255, 255, 0.88);
+            --border-card: rgba(15, 23, 42, 0.12);
+            --text-main: #0f172a;
+            --text-muted: #475569;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-base);
+            color: var(--text-main);
+            overflow-x: hidden;
+            transition: background-color 0.4s ease, color 0.4s ease;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .glass-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--border-card);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .glow-border {
+            position: relative;
+        }
+        .glow-border::after {
+            content: '';
+            position: absolute;
+            inset: -1px;
+            border-radius: inherit;
+            padding: 1px;
+            background: linear-gradient(135deg, rgba(var(--accent-rgb), 0.6), transparent 60%);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+        }
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.2); }
+        ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 3px; }
+
+        #cursorGlow {
+            position: fixed;
+            width: 380px;
+            height: 380px;
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--accent-glow), transparent 70%);
+            pointer-events: none;
+            z-index: 9998;
+            opacity: 0.8;
+            transform: translate(-50%, -50%);
+            transition: opacity 0.3s ease;
+            filter: blur(50px);
+        }
+
+        .theme-accent-text { color: var(--accent); }
+        .theme-accent-bg { background-color: var(--accent); }
+        .theme-accent-border { border-color: var(--accent); }
+
+        .dpad-btn:active, .fire-btn:active {
+            transform: scale(0.92);
+            filter: brightness(1.2);
+        }
+    </style>
+</head>
+<body class="theme-cyber selection:bg-amber-500 selection:text-slate-900">
+
+    <!-- 鼠标跟随光晕 -->
+    <div id="cursorGlow"></div>
+
+    <!-- 背景 Canvas 粒子网格 -->
+    <canvas id="bgCanvas" class="fixed inset-0 pointer-events-none z-0 opacity-40"></canvas>
+
+    <!-- 引导屏 Splash Screen -->
+    <div id="splashScreen" class="fixed inset-0 z-[9999] bg-slate-950 flex flex-col items-center justify-center transition-opacity duration-700 overflow-hidden">
+        <!-- 主题自适应动态背景：粒子 + 主题色径向光晕 -->
+        <canvas id="splashBg" class="absolute inset-0 w-full h-full pointer-events-none z-0"></canvas>
+        <div class="absolute inset-0 pointer-events-none z-0" style="background: radial-gradient(ellipse at 50% 35%, rgba(var(--accent-rgb), 0.22), transparent 65%);"></div>
+        <div class="absolute inset-0 pointer-events-none z-0 opacity-50" style="background: radial-gradient(circle at 20% 80%, rgba(var(--accent-rgb), 0.10), transparent 40%), radial-gradient(circle at 80% 20%, rgba(var(--accent-rgb), 0.10), transparent 40%);"></div>
+        <div class="relative z-10 text-center px-6 max-w-lg">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-mono mb-6 animate-pulse">
+                <span class="w-2 h-2 rounded-full bg-amber-500"></span>
+                SYSTEM READY // AI PORTFOLIO V3.0
+            </div>
+            <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight mb-3 bg-clip-text text-transparent bg-gradient-to-r from-white via-amber-200 to-amber-500">
+                陈宇涵
+            </h1>
+            <p class="text-slate-400 font-mono text-sm tracking-widest uppercase mb-8">
+                科学教育 · AI训练师 · 教育科技探索者
+            </p>
+            
+            <button id="enterPortalBtn" class="sound-click group relative inline-flex items-center gap-3 px-8 py-4 rounded-full bg-gradient-to-r from-amber-500 to-amber-600 text-slate-950 font-bold text-base shadow-lg shadow-amber-500/25 hover:shadow-amber-500/40 hover:scale-105 transition-all duration-300">
+                <span>进入沉浸式履历与 AI 成果展</span>
+                <i class="fa-solid fa-bolt text-sm group-hover:rotate-12 transition-transform"></i>
+            </button>
+            <p class="text-slate-500 text-xs mt-4 font-mono">提示：全板块支持音效反馈、平滑跳转与多配色主题体验</p>
+        </div>
+    </div>
+
+    <!-- 顶栏导航栏 -->
+    <header id="mainNav" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 py-4 px-6 border-b border-white/5 backdrop-blur-md bg-slate-950/80">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <a href="#hero" class="sound-click text-xl font-extrabold tracking-wider font-mono flex items-center gap-2 text-white">
+                <span class="text-amber-500">&lt;</span>陈宇涵<span class="text-amber-500">/&gt;</span>
+            </a>
+
+            <!-- 桌面端顶部导航栏：精准锚点 -->
+            <nav class="hidden md:flex items-center gap-1 bg-slate-900/80 p-1.5 rounded-full border border-white/10 text-xs font-medium">
+                <a href="#hero" class="sound-click px-4 py-2 rounded-full text-slate-300 hover:text-amber-400 hover:bg-white/5 transition-colors">/首页</a>
+                <a href="#ai-projects" class="sound-click px-4 py-2 rounded-full text-amber-400 font-bold hover:bg-amber-500/10 transition-colors">/AI成果与游戏</a>
+                <a href="#ai-agent" class="sound-click px-4 py-2 rounded-full text-slate-300 hover:text-amber-400 hover:bg-white/5 transition-colors">/AI智能体</a>
+                <a href="#capabilities" class="sound-click px-4 py-2 rounded-full text-slate-300 hover:text-amber-400 hover:bg-white/5 transition-colors">/核心能力</a>
+                <a href="#skills" class="sound-click px-4 py-2 rounded-full text-slate-300 hover:text-amber-400 hover:bg-white/5 transition-colors">/技能罗盘</a>
+                <a href="#certs" class="sound-click px-4 py-2 rounded-full text-slate-300 hover:text-amber-400 hover:bg-white/5 transition-colors">/认证与教育</a>
+            </nav>
+
+            <div class="flex items-center gap-2 sm:gap-3">
+                <!-- 声音开关按钮 -->
+                <button id="audioToggleBtn" title="切换互动音效" class="sound-click w-10 h-10 rounded-full glass-card flex items-center justify-center text-amber-400 hover:scale-110 transition-transform">
+                    <i class="fa-solid fa-volume-high text-sm"></i>
+                </button>
+
+                <!-- 多配色主题切换下拉选单 -->
+                <div class="relative inline-block text-left">
+                    <button id="themeDropdownBtn" title="切换配色主题" class="sound-click w-10 h-10 rounded-full glass-card flex items-center justify-center text-amber-400 hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-palette text-sm"></i>
+                    </button>
+                    <div id="themeDropdownMenu" class="hidden absolute right-0 mt-2 w-40 glass-card rounded-2xl border border-white/10 py-2 shadow-2xl z-50 font-mono text-xs">
+                        <button class="theme-select-btn sound-click w-full text-left px-4 py-2 hover:bg-white/10 text-amber-400 font-bold flex items-center gap-2" data-theme="theme-cyber">
+                            <span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span> 赛博金 (Cyber)
+                        </button>
+                        <button class="theme-select-btn sound-click w-full text-left px-4 py-2 hover:bg-white/10 text-emerald-400 flex items-center gap-2" data-theme="theme-matrix">
+                            <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span> 极客绿 (Matrix)
+                        </button>
+                        <button class="theme-select-btn sound-click w-full text-left px-4 py-2 hover:bg-white/10 text-purple-400 flex items-center gap-2" data-theme="theme-neon">
+                            <span class="w-2.5 h-2.5 rounded-full bg-purple-500"></span> 霓虹紫 (Neon)
+                        </button>
+                        <button class="theme-select-btn sound-click w-full text-left px-4 py-2 hover:bg-white/10 text-cyan-400 flex items-center gap-2" data-theme="theme-ocean">
+                            <span class="w-2.5 h-2.5 rounded-full bg-cyan-400"></span> 深海蓝 (Ocean)
+                        </button>
+                        <button class="theme-select-btn sound-click w-full text-left px-4 py-2 hover:bg-white/10 text-slate-800 dark:text-slate-200 flex items-center gap-2" data-theme="theme-light">
+                            <span class="w-2.5 h-2.5 rounded-full bg-slate-300"></span> 极简白 (Light)
+                        </button>
+                    </div>
+                </div>
+
+                <button id="toggleTerminalBtn" title="打开赛博终端" class="sound-click w-10 h-10 rounded-full glass-card flex items-center justify-center text-amber-400 hover:scale-110 transition-transform">
+                    <i class="fa-solid fa-terminal text-sm"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- 赛博命令行终端控制台 Modal -->
+    <div id="terminalOverlay" class="hidden fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4">
+        <div class="w-full max-w-3xl glass-card rounded-2xl border border-amber-500/30 overflow-hidden shadow-2xl flex flex-col h-[480px]">
+            <div class="bg-slate-900/90 px-4 py-3 border-b border-white/10 flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                    <span class="w-3 h-3 rounded-full bg-rose-500 cursor-pointer sound-click" id="closeTerminalDot"></span>
+                    <span class="w-3 h-3 rounded-full bg-amber-500"></span>
+                    <span class="w-3 h-3 rounded-full bg-emerald-500"></span>
+                    <span class="ml-2 font-mono text-xs text-slate-400">yuhan-terminal@v3.0:~</span>
+                </div>
+                <button id="closeTerminalBtn" class="sound-click text-slate-400 hover:text-white text-xs font-mono">关闭 [x]</button>
+            </div>
+            <div id="terminalOutput" class="p-4 font-mono text-xs text-emerald-400 overflow-y-auto flex-1 space-y-2 leading-relaxed">
+                <div class="text-slate-400">输入 <span class="text-amber-400">help</span> 获取指令，输入 <span class="text-amber-400">projects</span> 查阅 AI 游戏成果。</div>
+            </div>
+            <div class="p-3 bg-slate-900/50 border-t border-white/10 flex items-center gap-2 font-mono text-xs">
+                <span class="text-amber-400">yuhan$&nbsp;</span>
+                <input type="text" id="terminalInput" class="bg-transparent text-white border-none outline-none w-full font-mono" placeholder="输入命令: help, projects, skills, certs..." />
+            </div>
+        </div>
+    </div>
+
+    <!-- 主体内容 -->
+    <main id="mainContent" class="relative z-10 pt-24 pb-16 opacity-0 transition-opacity duration-700">
+        
+        <!-- Hero 个人介绍板块 -->
+        <section id="hero" class="min-h-[85vh] flex items-center justify-center px-6 relative py-12 scroll-mt-24 overflow-hidden">
+            <!-- Hero 动态主题背景 Canvas（默认流沙；紫→星河；绿→极光；蓝→潮汐） -->
+            <canvas id="heroBg" class="absolute -top-6 -right-6 -bottom-6 -left-6 w-[calc(100%+3rem)] h-[calc(100%+3rem)] pointer-events-none z-0"></canvas>
+            <div class="max-w-6xl mx-auto w-full relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <div class="lg:col-span-7 space-y-6">
+                    <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full glass-card border-amber-500/30 text-amber-400 text-xs font-mono">
+                        <i class="fa-solid fa-graduation-cap"></i> 杭州师范大学 2026 级科学教育（待入学）
+                    </div>
+                    
+                    <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight leading-none">
+                        探索 AI 与教育的 <br>
+                        <span class="bg-clip-text text-transparent bg-gradient-to-r from-amber-400 via-amber-300 to-amber-500">
+                            无限可能
+                        </span>
+                    </h1>
+                    
+                    <p class="text-slate-300 text-base sm:text-lg leading-relaxed max-w-2xl">
+                        我是<b>陈宇涵</b>。持有<b>阿里巴巴 AI 训练师认证</b>与<b>阿里云 Apsara Clouder 专项技能认证</b>。精通 Prompt 工程与 Web Canvas 渲染技术，专注独立完成 AI 算法集成、独立游戏开发与教育数字化体验探索。
+                    </p>
+
+                    <!-- 核心数据指标 -->
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 py-2 font-mono">
+                        <div class="glass-card p-3 rounded-2xl text-center">
+                            <div class="text-2xl font-bold text-amber-400">94.6%</div>
+                            <div class="text-[11px] text-slate-400">意图识别准确率</div>
+                        </div>
+                        <div class="glass-card p-3 rounded-2xl text-center">
+                            <div class="text-2xl font-bold text-amber-400">35%</div>
+                            <div class="text-[11px] text-slate-400">标注效率提升</div>
+                        </div>
+                        <div class="glass-card p-3 rounded-2xl text-center">
+                            <div class="text-2xl font-bold text-amber-400">20万+</div>
+                            <div class="text-[11px] text-slate-400">对话数据处理</div>
+                        </div>
+                        <div class="glass-card p-3 rounded-2xl text-center">
+                            <div class="text-2xl font-bold text-amber-400">1 款</div>
+                            <div class="text-[11px] text-slate-400">AI 部署游戏</div>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-wrap gap-3 pt-2">
+                        <button id="copyEmailBtn" class="sound-click px-6 py-3 rounded-full bg-amber-500 text-slate-950 font-bold text-sm hover:bg-amber-400 hover:shadow-lg hover:shadow-amber-500/20 transition-all flex items-center gap-2">
+                            <i class="fa-regular fa-envelope"></i> 复制邮箱 2405225397@qq.com
+                        </button>
+                        <button id="copyPhoneBtn" class="sound-click px-6 py-3 rounded-full glass-card border-amber-500/30 text-amber-400 hover:bg-amber-500/10 font-bold text-sm transition-all flex items-center gap-2">
+                            <i class="fa-solid fa-phone"></i> 15259116632
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 个人形象展示 -->
+                <div class="lg:col-span-5 flex flex-col sm:flex-row lg:flex-col gap-4 items-center justify-center">
+                    <div id="hologramCard" class="relative group w-72 sm:w-80 h-[410px] rounded-3xl glass-card p-3 border border-amber-500/30 transition-transform duration-200 cursor-pointer glow-border shadow-2xl">
+                        <!-- 装饰角标 -->
+                        <div class="absolute top-5 left-5 z-20 font-mono text-[10px] text-amber-400 bg-slate-950/80 px-2 py-0.5 rounded border border-amber-500/30">
+                            IDENTITY_CARD // 2026
+                        </div>
+
+                        <div class="w-full h-full rounded-2xl overflow-hidden relative bg-slate-900 flex items-center justify-center">
+                            <img src="白证件.jpg" alt="陈宇涵证件照" class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500" onerror="this.onerror=null; this.src='https://placehold.co/300x400/1e293b/f59e0b?text=%E9%99%88%E宇%E6%B6%B5';">
+                            <!-- 全息渐变蒙版 -->
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-80"></div>
+
+                            <div class="absolute bottom-4 left-4 right-4 text-left z-10 space-y-1">
+                                <div class="text-white font-bold text-lg">陈宇涵 (Chen Yuhan)</div>
+                                <div class="text-amber-400 font-mono text-xs"><i class="fa-solid fa-location-dot mr-1"></i>浙江 · 杭州</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- AI 成果与独立编程游戏作品集板块 -->
+        <section id="ai-projects" class="max-w-6xl mx-auto px-6 py-16 scroll-mt-24 border-t border-white/5">
+            <div class="text-center max-w-2xl mx-auto mb-12">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-mono mb-3">
+                    PROJECT SHOWCASE // HYPERLINKS READY
+                </div>
+                <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight">
+                    AI 成果与独立编程作品
+                </h2>
+                <p class="text-slate-400 text-sm mt-2">
+                    结合 Prompt 工程与 Web Canvas 渲染架构，可超链接访问或在简历内直接即时试玩！
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 max-w-2xl mx-auto gap-8">
+
+                <!-- 项目 1：坦克大战 -->
+                <div class="glass-card rounded-3xl p-8 border-amber-500/20 hover:border-amber-500/50 transition-all duration-300 flex flex-col justify-between group">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-mono font-bold">
+                                AI 成果作品 #01 (Canvas 弹幕射击)
+                            </span>
+                            <span class="text-slate-400 text-xs font-mono"><i class="fa-solid fa-shield text-amber-400"></i> 多类型坦克 AI 战术体验</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white mb-2 flex items-center gap-3 group-hover:text-amber-400 transition-colors">
+                            🛡️ 坦克大战 (Tank Battle)
+                        </h3>
+                        <p class="text-slate-300 text-sm leading-relaxed mb-6">
+                            红白机坦克大战 Modern 重构版。优化敌方坦克类型：包含<b>轻型冲锋战车(极速)</b>、<b>标准战车</b>与<b>重型装甲坦克(慢速高血)</b>，战术层次更丰富！
+                        </p>
+                        
+                        <div class="space-y-2 mb-6 text-xs text-slate-400 font-mono">
+                            <div class="flex items-center gap-2"><i class="fa-solid fa-bolt text-amber-400"></i> 冲锋坦克 (Speed: 3.6) / 标准战车 / 重型装甲 (HP: 3)</div>
+                            <div class="flex items-center gap-2"><i class="fa-solid fa-gamepad text-amber-400"></i> 电脑键盘 WASD / 方向键，手机端 D-Pad 触控</div>
+                            <div class="flex items-center gap-2"><i class="fa-solid fa-volume-high text-amber-400"></i> 射击与击毁全音效集成</div>
+                        </div>
+                    </div>
+
+                    <div class="pt-4 border-t border-white/10 flex flex-wrap gap-3 items-center justify-between">
+                        <div class="flex flex-wrap gap-2">
+                            <a href="https://clinquant-marshmallow-f59dcb.netlify.app/" target="_blank" rel="noopener noreferrer" class="sound-click inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-amber-500/20 border border-amber-500/40 text-amber-400 hover:bg-amber-500 hover:text-slate-950 font-bold text-xs transition-all">
+                                <span>🌐 超链接打开"坦克大战"</span>
+                                <i class="fa-solid fa-up-right-from-square text-xs"></i>
+                            </a>
+                        </div>
+                        <span class="text-xs text-slate-500 font-mono">clinquant-marshmallow-f59dcb.netlify.app</span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- AI 智能体互动模拟器板块 -->
+        <section id="ai-agent" class="max-w-6xl mx-auto px-6 py-16 scroll-mt-24 border-t border-white/5">
+            <div class="text-center max-w-2xl mx-auto mb-10">
+                <div class="font-mono text-xs text-amber-400 uppercase tracking-widest mb-2">// Interactive Agent</div>
+                <h2 class="text-3xl sm:text-4xl font-extrabold">与「陈宇涵 AI 智能体」对话</h2>
+                <p class="text-slate-400 text-sm mt-2">提问了解陈宇涵的阿里 AI 认证、AI 编程成果与科学教育探索经历</p>
+            </div>
+
+            <div class="max-w-3xl mx-auto glass-card rounded-3xl border border-amber-500/30 overflow-hidden shadow-2xl">
+                <!-- 聊天窗口顶栏 -->
+                <div class="bg-slate-900/90 px-6 py-4 border-b border-white/10 flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <div class="relative">
+                            <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-amber-500 to-amber-300 flex items-center justify-center text-slate-950 font-extrabold text-sm">
+                                YAI
+                            </div>
+                            <span class="absolute bottom-0 right-0 w-3 h-3 rounded-full bg-emerald-500 border-2 border-slate-950"></span>
+                        </div>
+                        <div>
+                            <div class="text-sm font-bold text-white">陈宇涵 Digital Clone <span class="text-[10px] bg-amber-500/20 text-amber-400 px-2 py-0.5 rounded font-mono ml-2">v3.0 Online</span></div>
+                            <div class="text-xs text-slate-400">阿里巴巴 AI 训练师知识库驱动</div>
+                        </div>
+                    </div>
+                    <button id="resetChatBtn" class="sound-click text-xs text-slate-400 hover:text-amber-400 font-mono"><i class="fa-solid fa-rotate-right mr-1"></i>重置对话</button>
+                </div>
+
+                <!-- 消息展示区 -->
+                <div id="chatMessages" class="p-6 h-80 overflow-y-auto space-y-4 font-sans text-sm">
+                    <div class="flex items-start gap-3">
+                        <div class="w-8 h-8 rounded-full bg-amber-500/20 border border-amber-500/30 text-amber-400 flex items-center justify-center text-xs font-mono shrink-0">AI</div>
+                        <div class="bg-slate-800/80 rounded-2xl rounded-tl-none p-4 text-slate-200 max-w-[85%] leading-relaxed border border-white/5">
+                            你好！我是陈宇涵的 AI 数字分身。你可以问我关于他的<b>坦克大战作品</b>、阿里巴巴/阿里云技能认证、Python 数据分析或科学教育背景！
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 快捷提问 -->
+                <div class="px-6 py-2 bg-slate-900/40 border-t border-white/5 flex gap-2 overflow-x-auto text-xs font-mono">
+                    <span class="text-slate-500 shrink-0 self-center">快捷提问:</span>
+                    <button class="quick-question-btn sound-click shrink-0 px-3 py-1 rounded-full bg-white/5 hover:bg-amber-500/20 text-slate-300 hover:text-amber-400 border border-white/10 transition-colors">聊聊你的坦克大战作品</button>
+                    <button class="quick-question-btn sound-click shrink-0 px-3 py-1 rounded-full bg-white/5 hover:bg-amber-500/20 text-slate-300 hover:text-amber-400 border border-white/10 transition-colors">你掌握什么 AI 训练师技能？</button>
+                    <button class="quick-question-btn sound-click shrink-0 px-3 py-1 rounded-full bg-white/5 hover:bg-amber-500/20 text-slate-300 hover:text-amber-400 border border-white/10 transition-colors">你的科学教育背景是什么？</button>
+                </div>
+
+                <!-- 输入框 -->
+                <div class="p-4 bg-slate-900/80 border-t border-white/10 flex items-center gap-2">
+                    <input type="text" id="chatInput" placeholder="输入你想询问的内容..." class="flex-1 bg-slate-950/80 text-white border border-white/10 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-amber-500 transition-colors" />
+                    <button id="sendChatBtn" class="sound-click px-5 py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-sm transition-all shrink-0">
+                        <i class="fa-solid fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 核心能力板块 -->
+        <section id="capabilities" class="max-w-6xl mx-auto px-6 py-16 scroll-mt-24 border-t border-white/5">
+            <div class="text-center max-w-2xl mx-auto mb-12">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-mono mb-3">
+                    CORE COMPETENCIES
+                </div>
+                <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight">三大核心能力支柱</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="glass-card p-8 rounded-3xl border border-white/10 hover:border-amber-500/50 transition-all duration-300 hover:-translate-y-2 group">
+                    <div class="font-mono text-4xl font-black text-amber-500/30 mb-4 group-hover:text-amber-500 transition-colors">01 /</div>
+                    <h3 class="text-xl font-bold mb-2">AI 独立编程与游戏开发</h3>
+                    <div class="text-xs font-mono text-amber-400 mb-4">AI Game & App Developer</div>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-6">
+                        熟练运用 Prompt 工程与 AI 辅助编程，独立完成 Web Canvas 渲染的坦克大战游戏架构设计，多种坦克类型的战术体验。
+                    </p>
+                    <div class="flex items-center gap-2 text-xs font-mono text-slate-300">
+                        <i class="fa-solid fa-check text-amber-500"></i> Canvas 60FPS
+                        <i class="fa-solid fa-check text-amber-500 ml-2"></i> 多类型坦克战术对抗
+                    </div>
+                </div>
+
+                <div class="glass-card p-8 rounded-3xl border border-white/10 hover:border-amber-500/50 transition-all duration-300 hover:-translate-y-2 group">
+                    <div class="font-mono text-4xl font-black text-amber-500/30 mb-4 group-hover:text-amber-500 transition-colors">02 /</div>
+                    <h3 class="text-xl font-bold mb-2">数据标注与意图挖掘</h3>
+                    <div class="text-xs font-mono text-amber-400 mb-4">AI Model Training & Clean</div>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-6">
+                        熟练掌握达摩院智能客服训练体系，精通 Python / Pandas 海量文本清洗与挖掘，累计处理 20万+ 对话标注数据，准确率达 94.6%。
+                    </p>
+                    <div class="flex items-center gap-2 text-xs font-mono text-slate-300">
+                        <i class="fa-solid fa-check text-amber-500"></i> Pandas清洗
+                        <i class="fa-solid fa-check text-amber-500 ml-2"></i> 意图精准识别
+                    </div>
+                </div>
+
+                <div class="glass-card p-8 rounded-3xl border border-white/10 hover:border-amber-500/50 transition-all duration-300 hover:-translate-y-2 group">
+                    <div class="font-mono text-4xl font-black text-amber-500/30 mb-4 group-hover:text-amber-500 transition-colors">03 /</div>
+                    <h3 class="text-xl font-bold mb-2">科学教育与 EdTech 融合</h3>
+                    <div class="text-xs font-mono text-amber-400 mb-4">Science Education & EdTech</div>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-6">
+                        将 AI 工具与科学教育（师范）深度融合，构建物理与数学建模视角，致力于开发下一代互动科学课件与教育数字化体验。
+                    </p>
+                    <div class="flex items-center gap-2 text-xs font-mono text-slate-300">
+                        <i class="fa-solid fa-check text-amber-500"></i> STEAM 教学
+                        <i class="fa-solid fa-check text-amber-500 ml-2"></i> 跨学科建模
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 技能罗盘 -->
+        <section id="skills" class="max-w-6xl mx-auto px-6 py-16 scroll-mt-24 border-t border-white/5">
+            <div class="text-center max-w-2xl mx-auto mb-12">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-mono mb-3">
+                    SKILL MATRIX
+                </div>
+                <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight">专业技能与能力拓扑</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="glass-card p-6 rounded-3xl border border-white/10 space-y-6">
+                    <div>
+                        <div class="flex justify-between text-sm font-semibold mb-2">
+                            <span>AI 编程与 Web Canvas 渲染 (坦克大战)</span>
+                            <span class="text-amber-400 font-mono">92%</span>
+                        </div>
+                        <div class="w-full h-3 bg-slate-900 rounded-full overflow-hidden border border-white/5">
+                            <div class="h-full bg-gradient-to-r from-amber-600 to-amber-400 rounded-full" style="width: 92%;"></div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="flex justify-between text-sm font-semibold mb-2">
+                            <span>AI 训练与数据标注 (达摩院体系)</span>
+                            <span class="text-amber-400 font-mono">88%</span>
+                        </div>
+                        <div class="w-full h-3 bg-slate-900 rounded-full overflow-hidden border border-white/5">
+                            <div class="h-full bg-gradient-to-r from-amber-600 to-amber-400 rounded-full" style="width: 88%;"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-card p-6 rounded-3xl border border-white/10 space-y-6">
+                    <div>
+                        <div class="flex justify-between text-sm font-semibold mb-2">
+                            <span>Python 数据分析 (Pandas / 可视化)</span>
+                            <span class="text-amber-400 font-mono">85%</span>
+                        </div>
+                        <div class="w-full h-3 bg-slate-900 rounded-full overflow-hidden border border-white/5">
+                            <div class="h-full bg-gradient-to-r from-amber-600 to-amber-400 rounded-full" style="width: 85%;"></div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="flex justify-between text-sm font-semibold mb-2">
+                            <span>科学教育课程设计与学术答辩</span>
+                            <span class="text-amber-400 font-mono">90%</span>
+                        </div>
+                        <div class="w-full h-3 bg-slate-900 rounded-full overflow-hidden border border-white/5">
+                            <div class="h-full bg-gradient-to-r from-amber-600 to-amber-400 rounded-full" style="width: 90%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- AI 权威认证证书板块 -->
+        <section id="certs" class="max-w-6xl mx-auto px-6 py-16 scroll-mt-24 border-t border-white/5">
+            <div class="text-center max-w-2xl mx-auto mb-12">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-mono mb-3">
+                    CERTIFICATIONS & CREDENTIALS
+                </div>
+                <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight">AI 权威技能证书与教育</h2>
+                <p class="text-slate-400 text-sm mt-2">阿里巴巴达摩院与阿里云官方权威认证</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+                <!-- 证书 1 -->
+                <div class="glass-card p-6 rounded-3xl border-amber-500/20 text-center flex flex-col justify-between">
+                    <div>
+                        <span class="inline-block px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-mono font-bold mb-4">
+                            AIT 初级认证
+                        </span>
+                        <h3 class="text-xl font-bold mb-1 text-white">达摩院"人工智能训练师"初级证书</h3>
+                        <p class="text-slate-400 text-xs mb-1">颁发机构：达摩院 - 机器智能技术事业部 / 阿里云智能服务事业部</p>
+                        <p class="text-amber-400/80 font-mono text-[11px] mb-4">证书编号：AIT260730185253000178</p>
+                    </div>
+                    <div class="w-full h-64 bg-slate-900 rounded-2xl overflow-hidden flex items-center justify-center p-2 border border-white/5">
+                        <img src="阿里ai初级.jpg" alt="人工智能训练师证书" class="max-h-full max-w-full object-contain rounded-xl" onerror="this.onerror=null; this.src='https://placehold.co/600x400/1e293b/f59e0b?text=%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E8%AE%AD%E7%BB%83%E5%B8%88%E8%AF%81%E4%B9%A6';">
+                    </div>
+                </div>
+
+                <!-- 证书 2 -->
+                <div class="glass-card p-6 rounded-3xl border-amber-500/20 text-center flex flex-col justify-between">
+                    <div>
+                        <span class="inline-block px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-mono font-bold mb-4">
+                            Clouder 专项认证
+                        </span>
+                        <h3 class="text-xl font-bold mb-1 text-white">阿里云 Apsara Clouder 专项技能认证</h3>
+                        <p class="text-slate-400 text-xs mb-1">方向：大模型 Clouder 认证 - 基于通义灵码实现高效 AI 编码实践</p>
+                        <p class="text-amber-400/80 font-mono text-[11px] mb-4">证书编号：CLDM07260802755948</p>
+                    </div>
+                    <div class="w-full h-64 bg-slate-900 rounded-2xl overflow-hidden flex items-center justify-center p-2 border border-white/5">
+                        <img src="ai证书.jpg" alt="阿里云 Apsara Clouder 专项技能认证" class="max-h-full max-w-full object-contain rounded-xl" onerror="this.onerror=null; this.src='https://placehold.co/600x400/1e293b/f59e0b?text=%E9%98%BF%E9%87%8C%E4%BA%91Clouder%E8%AF%81%E4%B9%A6';">
+                    </div>
+                </div>
+            </div>
+
+            <!-- 教育背景板块 -->
+            <div id="education" class="glass-card p-8 sm:p-10 rounded-3xl border-amber-500/20 max-w-4xl mx-auto">
+                <div class="flex items-center gap-4 mb-6">
+                    <div class="w-14 h-14 rounded-2xl bg-amber-500/10 border border-amber-500/30 text-amber-400 flex items-center justify-center text-2xl font-bold">
+                        <i class="fa-solid fa-graduation-cap"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold text-white">杭州师范大学</h3>
+                        <p class="text-amber-400 text-sm font-semibold">科学教育（师范）专业 · 本科（2026 级待入学）</p>
+                    </div>
+                </div>
+                <p class="text-slate-300 text-sm leading-relaxed mb-6">
+                    预计毕业年份：2030 年 6 月。核心专业课程覆盖：教育学原理、教育心理学、科学课程与教学论、现代教育技术应用、教育统计与测量等。
+                </p>
+            </div>
+        </section>
+
+        <!-- 生活风采剪影 -->
+        <section id="life" class="max-w-6xl mx-auto px-6 py-16 scroll-mt-24 border-t border-white/5">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+                <div class="md:col-span-5 space-y-4">
+                    <div class="font-mono text-xs text-amber-400 uppercase tracking-widest">// Life & Passions</div>
+                    <h2 class="text-3xl font-extrabold">热爱生活，奔赴山海</h2>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        在代码与逻辑之外，同样热爱生活与探索。擅长物理建模、喜欢足球运动与马拉松，亦热衷于文学写作与机器人硬件实验。
+                    </p>
+                </div>
+                <div class="md:col-span-7">
+                    <div class="relative rounded-3xl overflow-hidden glass-card border border-white/10 group h-80 flex items-center justify-center bg-slate-950">
+                        <img src="青岛.jpg" alt="陈宇涵在青岛" class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700" onerror="this.onerror=null; this.src='https://placehold.co/800x400/1e293b/f59e0b?text=%E9%99%88%E宇%E6%B6%B5+%C2%B7+%E9%9D%92%E5%B2%9B';">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent"></div>
+                        <div class="absolute bottom-6 left-6 right-6 text-white font-bold text-lg">
+                            <i class="fa-solid fa-compass text-amber-400 mr-2"></i>陈宇涵 · 在青岛
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- 页脚（主题自适应版权保护） -->
+    <footer class="border-t border-white/10 py-8 bg-slate-950/80 relative z-10 text-center font-mono text-xs">
+        <div class="max-w-6xl mx-auto px-6 space-y-2">
+            <div class="flex items-center justify-center gap-2" style="color: rgb(var(--accent-rgb));">
+                <i class="fa-solid fa-copyright text-[10px]"></i>
+                <span class="opacity-90">2026 陈宇涵 · Yuhan Chen. AI Portfolio & Interactive Resume · 保留所有权利</span>
+            </div>
+            <div class="text-slate-500 text-[10px] tracking-widest uppercase">
+                本作品采用 CC BY-NC 4.0 许可 · 转载请保留原作者与链接 · 模板 / 动态背景动画 / 交互逻辑均受版权保护
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const $ = (sel, ctx = document) => ctx.querySelector(sel);
+        const $$ = (sel, ctx = document) => Array.from(ctx.querySelectorAll(sel));
+
+        // ===============================================
+        // 1. Web Audio API 音效合成引擎 (无需外部音频文件)
+        // ===============================================
+        class SoundEngine {
+            constructor() {
+                this.ctx = null;
+                this.enabled = true;
+            }
+
+            init() {
+                if (!this.ctx) {
+                    const AudioContext = window.AudioContext || window.webkitAudioContext;
+                    if (AudioContext) this.ctx = new AudioContext();
+                }
+            }
+
+            playClick() {
+                if (!this.enabled) return;
+                this.init();
+                if (!this.ctx) return;
+                try {
+                    const osc = this.ctx.createOscillator();
+                    const gain = this.ctx.createGain();
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(600, this.ctx.currentTime);
+                    osc.frequency.exponentialRampToValueAtTime(880, this.ctx.currentTime + 0.05);
+                    gain.gain.setValueAtTime(0.15, this.ctx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + 0.05);
+                    osc.connect(gain);
+                    gain.connect(this.ctx.destination);
+                    osc.start();
+                    osc.stop(this.ctx.currentTime + 0.05);
+                } catch(e) {}
+            }
+
+            playShot() {
+                if (!this.enabled) return;
+                this.init();
+                if (!this.ctx) return;
+                try {
+                    const osc = this.ctx.createOscillator();
+                    const gain = this.ctx.createGain();
+                    osc.type = 'square';
+                    osc.frequency.setValueAtTime(800, this.ctx.currentTime);
+                    osc.frequency.exponentialRampToValueAtTime(120, this.ctx.currentTime + 0.08);
+                    gain.gain.setValueAtTime(0.2, this.ctx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + 0.08);
+                    osc.connect(gain);
+                    gain.connect(this.ctx.destination);
+                    osc.start();
+                    osc.stop(this.ctx.currentTime + 0.08);
+                } catch(e) {}
+            }
+
+            playExplosion() {
+                if (!this.enabled) return;
+                this.init();
+                if (!this.ctx) return;
+                try {
+                    const bufferSize = this.ctx.sampleRate * 0.2;
+                    const buffer = this.ctx.createBuffer(1, bufferSize, this.ctx.sampleRate);
+                    const output = buffer.getChannelData(0);
+                    for (let i = 0; i < bufferSize; i++) {
+                        output[i] = Math.random() * 2 - 1;
+                    }
+                    const whiteNoise = this.ctx.createBufferSource();
+                    whiteNoise.buffer = buffer;
+
+                    const filter = this.ctx.createBiquadFilter();
+                    filter.type = 'lowpass';
+                    filter.frequency.setValueAtTime(800, this.ctx.currentTime);
+                    filter.frequency.linearRampToValueAtTime(50, this.ctx.currentTime + 0.2);
+
+                    const gain = this.ctx.createGain();
+                    gain.gain.setValueAtTime(0.3, this.ctx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + 0.2);
+
+                    whiteNoise.connect(filter);
+                    filter.connect(gain);
+                    gain.connect(this.ctx.destination);
+
+                    whiteNoise.start();
+                    whiteNoise.stop(this.ctx.currentTime + 0.2);
+                } catch(e) {}
+            }
+
+            playThemeSwoosh() {
+                if (!this.enabled) return;
+                this.init();
+                if (!this.ctx) return;
+                try {
+                    const osc = this.ctx.createOscillator();
+                    const gain = this.ctx.createGain();
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(300, this.ctx.currentTime);
+                    osc.frequency.exponentialRampToValueAtTime(1200, this.ctx.currentTime + 0.15);
+                    gain.gain.setValueAtTime(0.12, this.ctx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + 0.15);
+                    osc.connect(gain);
+                    gain.connect(this.ctx.destination);
+                    osc.start();
+                    osc.stop(this.ctx.currentTime + 0.15);
+                } catch(e) {}
+            }
+        }
+
+        const sounds = new SoundEngine();
+
+        function initAudioToggle() {
+            const btn = $('#audioToggleBtn');
+            if (!btn) return;
+            btn.addEventListener('click', () => {
+                sounds.enabled = !sounds.enabled;
+                if (sounds.enabled) {
+                    btn.innerHTML = `<i class="fa-solid fa-volume-high text-sm"></i>`;
+                    sounds.playClick();
+                } else {
+                    btn.innerHTML = `<i class="fa-solid fa-volume-xmark text-sm text-rose-400"></i>`;
+                }
+            });
+
+            document.addEventListener('click', (e) => {
+                if (e.target.closest('.sound-click')) {
+                    sounds.playClick();
+                }
+            });
+        }
+
+        // ===============================================
+        // 2. 恢复并拓展多个配色主题 (Cyber/Matrix/Neon/Ocean/Light)
+        // ===============================================
+        function initMultiThemeSystem() {
+            const btn = $('#themeDropdownBtn');
+            const menu = $('#themeDropdownMenu');
+
+            if (btn && menu) {
+                btn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    menu.classList.toggle('hidden');
+                });
+
+                document.addEventListener('click', () => menu.classList.add('hidden'));
+            }
+
+            $$('.theme-select-btn').forEach(b => {
+                b.addEventListener('click', () => {
+                    const themeName = b.getAttribute('data-theme');
+                    document.body.className = `${themeName} selection:bg-amber-500 selection:text-slate-950`;
+                    sounds.playThemeSwoosh();
+                    if (window.setHeroBgTheme) window.setHeroBgTheme(themeName);
+                    if (menu) menu.classList.add('hidden');
+                });
+            });
+        }
+
+        function initBgCanvas() {
+            const canvas = $('#bgCanvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            let particles = [];
+
+            function resize() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+            resize();
+            window.addEventListener('resize', resize);
+
+            for (let i = 0; i < 45; i++) {
+                particles.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    vx: (Math.random() - 0.5) * 0.5,
+                    vy: (Math.random() - 0.5) * 0.5,
+                    size: Math.random() * 2 + 1
+                });
+            }
+
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.fillStyle = 'rgba(245, 158, 11, 0.4)';
+
+                particles.forEach(p => {
+                    p.x += p.vx;
+                    p.y += p.vy;
+                    if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+                    if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                    ctx.fill();
+                });
+
+                requestAnimationFrame(animate);
+            }
+            animate();
+        }
+
+        // ===============================================
+        // 2.1 Hero 动态主题背景：流沙 / 星河 / 极光 / 潮汐
+        // ===============================================
+        function initHeroBg() {
+            const canvas = document.getElementById('heroBg');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            let w = 0, h = 0;
+            const stars = [];
+            let currentTheme = (document.body.className.match(/theme-\w+/) || ['theme-cyber'])[0];
+
+            function readAccent() {
+                const rgb = getComputedStyle(document.body).getPropertyValue('--accent-rgb').trim();
+                return rgb || '245, 158, 11';
+            }
+
+            function resize() {
+                const r = canvas.parentElement.getBoundingClientRect();
+                canvas.width = Math.ceil(r.width + 48);
+                canvas.height = Math.ceil(r.height + 48);
+                w = canvas.width;
+                h = canvas.height;
+                stars.length = 0;
+                for (let i = 0; i < 180; i++) {
+                    stars.push({
+                        x: Math.random() * w,
+                        y: Math.random() * h,
+                        z: Math.random() * 2 + 0.5,
+                        s: Math.random() * 1.6 + 0.3
+                    });
+                }
+            }
+
+            // 流沙：起伏沙丘底座 + 螺旋粒子龙卷 + 顶部光晕
+            function drawSand(t, rgb) {
+                // 暖色调渐变底
+                const bg = ctx.createLinearGradient(0, 0, 0, h);
+                bg.addColorStop(0, 'rgba(40, 25, 10, 0.08)');
+                bg.addColorStop(1, `rgba(${rgb}, 0.2)`);
+                ctx.fillStyle = bg;
+                ctx.fillRect(0, 0, w, h);
+
+                // 远景沙丘层次
+                for (let i = 0; i < 4; i++) {
+                    const baseY = h * 0.62 + i * 14;
+                    const amp = 28 - i * 4;
+                    ctx.beginPath();
+                    ctx.moveTo(0, h);
+                    for (let x = 0; x <= w; x += 4) {
+                        const y = baseY + Math.sin(x * 0.006 + t * 0.3 + i) * amp + Math.sin(x * 0.02 + t * 0.4) * 6;
+                        ctx.lineTo(x, y);
+                    }
+                    ctx.lineTo(w, h);
+                    ctx.closePath();
+                    ctx.fillStyle = `rgba(${rgb}, ${(0.12 + i * 0.05).toFixed(2)})`;
+                    ctx.fill();
+                }
+
+                // 螺旋粒子龙卷（核心视觉）
+                const cx = w * 0.5;
+                for (let i = 0; i < 220; i++) {
+                    const phase = t * 0.9 + i * 0.16;
+                    const radius = 30 + (i % 22) * 6;
+                    const px = cx + Math.cos(phase * 1.5) * radius + Math.sin(t * 0.4 + i * 0.3) * 18;
+                    const py = h * 0.5 + Math.sin(phase) * h * 0.35 + (i % 8) * 5 - 20;
+                    const size = 0.7 + (i % 4) * 0.45;
+                    const alpha = 0.35 + (Math.sin(t * 2 + i * 0.4) * 0.5 + 0.5) * 0.55;
+                    ctx.fillStyle = `rgba(${rgb}, ${alpha.toFixed(2)})`;
+                    ctx.beginPath();
+                    ctx.arc(px, py, size, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+
+                // 顶部光晕
+                const glow = ctx.createRadialGradient(w * 0.65, h * 0.05, 0, w * 0.65, h * 0.05, w * 0.5);
+                glow.addColorStop(0, `rgba(${rgb}, 0.25)`);
+                glow.addColorStop(1, `rgba(${rgb}, 0)`);
+                ctx.fillStyle = glow;
+                ctx.fillRect(0, 0, w, h);
+            }
+
+            // 星河：深邃星云 + 飘移星点（带光晕与星核）+ 螺旋星轨
+            function drawGalaxy(t, rgb) {
+                // 星云深空
+                const bg = ctx.createRadialGradient(w * 0.7, h * 0.3, 0, w * 0.7, h * 0.3, w * 0.85);
+                bg.addColorStop(0, `rgba(${rgb}, 0.2)`);
+                bg.addColorStop(0.4, `rgba(${rgb}, 0.08)`);
+                bg.addColorStop(1, 'rgba(7,10,18,1)');
+                ctx.fillStyle = bg;
+                ctx.fillRect(0, 0, w, h);
+
+                // 螺旋星轨
+                for (let i = 0; i < 6; i++) {
+                    ctx.beginPath();
+                    for (let a = 0; a <= Math.PI * 4; a += 0.08) {
+                        const r = a * 14 + i * 22;
+                        const x = w * 0.7 + Math.cos(a + t * 0.3 + i * 0.5) * r;
+                        const y = h * 0.4 + Math.sin(a + t * 0.3 + i * 0.5) * r * 0.55;
+                        if (a === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+                    }
+                    ctx.strokeStyle = `rgba(${rgb}, 0.08)`;
+                    ctx.lineWidth = 1;
+                    ctx.stroke();
+                }
+
+                // 流动星点（含光晕、星核）
+                for (const s of stars) {
+                    s.x -= 0.6 * s.z;
+                    s.y += 0.2 * s.z;
+                    if (s.x < -4) { s.x = w + 4; s.y = Math.random() * h; }
+                    if (s.y > h + 4) { s.y = -4; s.x = Math.random() * w; }
+                    const g = ctx.createRadialGradient(s.x, s.y, 0, s.x, s.y, s.s * 5);
+                    g.addColorStop(0, `rgba(${rgb}, ${(0.5 + Math.random() * 0.4).toFixed(2)})`);
+                    g.addColorStop(1, `rgba(${rgb}, 0)`);
+                    ctx.fillStyle = g;
+                    ctx.beginPath();
+                    ctx.arc(s.x, s.y, s.s * 5, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.fillStyle = `rgba(255, 255, 255, 0.95)`;
+                    ctx.beginPath();
+                    ctx.arc(s.x, s.y, s.s * 0.55, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+            }
+
+            // 真实极光：远处星空 + 远山脊剪影 + 3 层自然飘移光幕 + 柔海面倒影 + 水面细密涟漪
+            function drawAurora(t, rgb) {
+                // 1. 极夜深空（上方更黑，下方轻微海平面冷色）
+                const sky = ctx.createLinearGradient(0, 0, 0, h);
+                sky.addColorStop(0,    'rgba(2, 10, 20, 1)');
+                sky.addColorStop(0.55, 'rgba(4, 16, 26, 1)');
+                sky.addColorStop(0.78, 'rgba(6, 22, 32, 1)');
+                sky.addColorStop(1,    'rgba(8, 28, 38, 1)');
+                ctx.fillStyle = sky;
+                ctx.fillRect(0, 0, w, h);
+
+                // 2. 远处星空（200 颗，含尺寸变化）
+                for (let i = 0; i < 200; i++) {
+                    const sx = Math.abs(i * 67 + i * i * 13) % w;
+                    const sy = Math.abs(i * 41 + i * 7) % (h * 0.72);
+                    const twinkle = 0.50 + Math.sin(t * 1.5 + i * 0.4) * 0.35 + Math.cos(t * 0.8 + i * 0.3) * 0.20;
+                    const a = Math.max(0.12, Math.min(1, twinkle));
+                    const size = (i % 13 === 0) ? 1.4 : (i % 5 === 0 ? 0.9 : 0.55);
+                    ctx.fillStyle = `rgba(220, 230, 255, ${a.toFixed(2)})`;
+                    ctx.beginPath();
+                    ctx.arc(sx, sy, size, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+
+                // 3. 远处地平线山脊剪影（自然起伏的山轮廓）
+                const horizon = h * 0.70;
+                ctx.fillStyle = 'rgba(2, 10, 18, 1)';
+                ctx.beginPath();
+                ctx.moveTo(0, h);
+                ctx.lineTo(0, horizon);
+                for (let x = 0; x <= w; x += 6) {
+                    const peak = Math.sin(x * 0.0055) * 9
+                              + Math.sin(x * 0.017 + 1.2) * 5
+                              + Math.cos(x * 0.0034 + 2.5) * 6;
+                    ctx.lineTo(x, horizon + peak);
+                }
+                ctx.lineTo(w, horizon);
+                ctx.lineTo(w, h);
+                ctx.closePath();
+                ctx.fill();
+
+                // 4. 3 层自然飘移的极光帘幕（顶端更亮，自下而上衰减到 0）
+                const greenRgb = '74, 222, 128';
+                const purpleRgb = '167, 139, 250';
+                const layers = [
+                    { color: rgb,         alpha: 0.42, baseY: 0.22, amp: 140, foldAmp: 28, phase: 0    },
+                    { color: greenRgb,    alpha: 0.28, baseY: 0.16, amp: 110, foldAmp: 22, phase: 1.20 },
+                    { color: purpleRgb,   alpha: 0.18, baseY: 0.10, amp: 160, foldAmp: 34, phase: 2.40 }
+                ];
+
+                for (const L of layers) {
+                    const sway = Math.sin(t * 0.18) * w * 0.08;
+                    const intensity = 0.92 + Math.sin(t * 0.22 + L.phase) * 0.08;
+                    ctx.beginPath();
+                    ctx.moveTo(0, h);
+                    for (let x = 0; x <= w; x += 3) {
+                        const lx = x - sway;
+                        const main = Math.sin(lx * 0.005 + t * 0.30 + L.phase) * L.amp;
+                        const fold = Math.sin(lx * 0.016 + t * 0.50 + L.phase) * L.foldAmp;
+                        const micro = Math.cos(lx * 0.045 + t * 1.0) * 3;
+                        const y = h * L.baseY + (main + fold + micro) * intensity;
+                        ctx.lineTo(x, y);
+                    }
+                    ctx.lineTo(w, h);
+                    ctx.closePath();
+
+                    // 顶部稍亮、向山脊渐隐（自然衰减）
+                    const grad = ctx.createLinearGradient(0, h * (L.baseY - 0.26), 0, h * L.baseY);
+                    grad.addColorStop(0,    `rgba(${L.color}, 0)`);
+                    grad.addColorStop(0.45, `rgba(${L.color}, ${L.alpha})`);
+                    grad.addColorStop(0.85, `rgba(${L.color}, ${(L.alpha * 0.5).toFixed(2)})`);
+                    grad.addColorStop(1,    `rgba(${L.color}, 0)`);
+                    ctx.fillStyle = grad;
+                    ctx.fill();
+                }
+
+                // 5. 海面倒影（用 scale 翻转，沿山脊向下；颜色自然衰减）
+                for (const L of layers) {
+                    const sway = Math.sin(t * 0.18) * w * 0.08;
+                    const intensity = 0.92 + Math.sin(t * 0.22 + L.phase) * 0.08;
+                    ctx.save();
+                    ctx.translate(0, horizon + (h - horizon) / 2);
+                    ctx.scale(1, -0.40);
+                    ctx.translate(0, -(horizon + (h - horizon) / 2));
+                    ctx.beginPath();
+                    ctx.moveTo(0, h);
+                    for (let x = 0; x <= w; x += 3) {
+                        const lx = x - sway;
+                        const main = Math.sin(lx * 0.005 + t * 0.30 + L.phase) * L.amp * 0.55;
+                        const fold = Math.sin(lx * 0.016 + t * 0.50 + L.phase) * L.foldAmp * 0.55;
+                        const y = h * L.baseY + (main + fold) * intensity + (h - horizon) / 2;
+                        ctx.lineTo(x, y);
+                    }
+                    ctx.lineTo(w, h);
+                    ctx.closePath();
+                    const refGrad = ctx.createLinearGradient(0, horizon, 0, h);
+                    refGrad.addColorStop(0, `rgba(${L.color}, ${(L.alpha * 0.45).toFixed(2)})`);
+                    refGrad.addColorStop(1, `rgba(${L.color}, 0)`);
+                    ctx.fillStyle = refGrad;
+                    ctx.fill();
+                    ctx.restore();
+                }
+
+                // 6. 海面暗化（增强水面深度）
+                const waterGrad = ctx.createLinearGradient(0, horizon, 0, h);
+                waterGrad.addColorStop(0, 'rgba(2, 12, 20, 0.45)');
+                waterGrad.addColorStop(1, 'rgba(2, 12, 20, 0.90)');
+                ctx.fillStyle = waterGrad;
+                ctx.fillRect(0, horizon, w, h - horizon);
+
+                // 7. 细密水面波纹（取代原来的 14 道光柱 + 90 处反光斑）
+                for (let i = 0; i < 18; i++) {
+                    const baseY = horizon + 6 + i * (h - horizon) / 22;
+                    const alpha = 0.10 + (i % 3) * 0.05;
+                    ctx.strokeStyle = `rgba(${rgb}, ${alpha.toFixed(2)})`;
+                    ctx.lineWidth = 0.6;
+                    ctx.beginPath();
+                    for (let x = 0; x <= w; x += 6) {
+                        const y = baseY + Math.sin((x + t * 22 + i * 50) * 0.045) * 1.0;
+                        if (x === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+                    }
+                    ctx.stroke();
+                }
+            }
+
+            // 潮汐：日落海滩，多层浪涌 + 白沫边 + 金色波光
+            function drawTide(t, rgb) {
+                // 天空日落到深水的渐变
+                const bg = ctx.createLinearGradient(0, 0, 0, h);
+                bg.addColorStop(0, 'rgba(255, 215, 145, 0.06)');
+                bg.addColorStop(0.45, `rgba(${rgb}, 0.04)`);
+                bg.addColorStop(1, 'rgba(8, 40, 60, 0.32)');
+                ctx.fillStyle = bg;
+                ctx.fillRect(0, 0, w, h);
+
+                // 顶部暖色光带
+                const sky = ctx.createLinearGradient(0, 0, 0, h * 0.35);
+                sky.addColorStop(0, `rgba(${rgb}, 0.12)`);
+                sky.addColorStop(1, `rgba(${rgb}, 0)`);
+                ctx.fillStyle = sky;
+                ctx.fillRect(0, 0, w, h * 0.35);
+
+                // 多层浪涌（相位差造成潮起潮落）
+                for (let i = 0; i < 6; i++) {
+                    const baseY = h * 0.5 + i * 13 + Math.sin(t * 0.55 + i * 0.8) * 20;
+                    const amp = 14 - i * 1.6;
+                    const speed = 0.8 + i * 0.18;
+
+                    // 浪体填充
+                    ctx.beginPath();
+                    ctx.moveTo(0, h);
+                    for (let x = 0; x <= w; x += 3) {
+                        const y = baseY + Math.sin(x * 0.008 + t * speed + i) * amp + Math.cos(x * 0.022 + t * 0.5) * 4;
+                        ctx.lineTo(x, y);
+                    }
+                    ctx.lineTo(w, h);
+                    ctx.closePath();
+                    ctx.fillStyle = `rgba(${rgb}, ${(0.28 - i * 0.04).toFixed(2)})`;
+                    ctx.fill();
+
+                    // 浪脊白沫
+                    ctx.beginPath();
+                    for (let x = 0; x <= w; x += 3) {
+                        const y = baseY + Math.sin(x * 0.008 + t * speed + i) * amp;
+                        if (x === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+                    }
+                    ctx.strokeStyle = `rgba(255, 255, 255, ${(0.22 - i * 0.03).toFixed(2)})`;
+                    ctx.lineWidth = 1.2;
+                    ctx.stroke();
+                }
+
+                // 日落波光（金色光斑）
+                for (let i = 0; i < 18; i++) {
+                    const x = (i * 79 + t * 38) % w;
+                    const y = h * 0.55 + Math.sin(x * 0.01 + t) * 18;
+                    const g = ctx.createRadialGradient(x, y, 0, x, y, 7);
+                    g.addColorStop(0, 'rgba(255, 220, 150, 0.45)');
+                    g.addColorStop(1, 'rgba(255, 220, 150, 0)');
+                    ctx.fillStyle = g;
+                    ctx.beginPath();
+                    ctx.arc(x, y, 7, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+
+                // 湿润沙面（底部反光带）
+                const shoreY = h * 0.65;
+                const shore = ctx.createLinearGradient(0, shoreY, 0, h);
+                shore.addColorStop(0, `rgba(${rgb}, 0.16)`);
+                shore.addColorStop(1, `rgba(${rgb}, 0)`);
+                ctx.fillStyle = shore;
+                ctx.fillRect(0, shoreY, w, h - shoreY);
+            }
+
+            function loop(time) {
+                const t = time * 0.001;
+                ctx.clearRect(0, 0, w, h);
+                const rgb = readAccent();
+                switch (currentTheme) {
+                    case 'theme-neon':   drawGalaxy(t, rgb); break;
+                    case 'theme-matrix': drawAurora(t, rgb); break;
+                    case 'theme-ocean':  drawTide(t, rgb);   break;
+                    case 'theme-cyber':
+                    case 'theme-light':
+                    default:             drawSand(t, rgb);   break;
+                }
+                requestAnimationFrame(loop);
+            }
+
+            window.setHeroBgTheme = function(themeName) {
+                currentTheme = themeName;
+            };
+
+            resize();
+            window.addEventListener('resize', resize);
+            requestAnimationFrame(loop);
+        }
+
+        function initCursorGlow() {
+            const glow = $('#cursorGlow');
+            let mx = window.innerWidth / 2, my = window.innerHeight / 2;
+            let cx = mx, cy = my;
+
+            document.addEventListener('mousemove', e => {
+                mx = e.clientX;
+                my = e.clientY;
+            });
+
+            function render() {
+                cx += (mx - cx) * 0.1;
+                cy += (my - cy) * 0.1;
+                if (glow) {
+                    glow.style.left = cx + 'px';
+                    glow.style.top = cy + 'px';
+                }
+                requestAnimationFrame(render);
+            }
+            render();
+        }
+
+        function initSplash() {
+            const btn = $('#enterPortalBtn');
+            const splash = $('#splashScreen');
+            const main = $('#mainContent');
+
+            if (btn && splash) {
+                btn.addEventListener('click', () => {
+                    sounds.playThemeSwoosh();
+                    splash.classList.add('opacity-0', 'pointer-events-none');
+                    setTimeout(() => {
+                        splash.style.display = 'none';
+                        if (main) main.classList.remove('opacity-0');
+                    }, 600);
+                });
+            }
+        }
+
+        // ====================================================
+        // Splash 主题自适应动态背景：上漂粒子 + 底部主题色波浪
+        // ====================================================
+        function initSplashBg() {
+            const canvas = document.getElementById('splashBg');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            let w = 0, h = 0;
+            const particles = [];
+
+            function readAccent() {
+                return getComputedStyle(document.body).getPropertyValue('--accent-rgb').trim() || '245, 158, 11';
+            }
+
+            function resize() {
+                const r = canvas.getBoundingClientRect();
+                canvas.width = Math.ceil(r.width);
+                canvas.height = Math.ceil(r.height);
+                w = canvas.width;
+                h = canvas.height;
+                particles.length = 0;
+                for (let i = 0; i < 90; i++) {
+                    particles.push({
+                        x: Math.random() * w,
+                        y: Math.random() * h,
+                        r: Math.random() * 1.8 + 0.6,
+                        vx: (Math.random() - 0.5) * 0.25,
+                        vy: -Math.random() * 0.5 - 0.05,
+                        pulse: Math.random() * Math.PI * 2,
+                        sizeJitter: Math.random()
+                    });
+                }
+            }
+
+            function animate(time) {
+                const t = time * 0.001;
+                const rgb = readAccent();
+                ctx.clearRect(0, 0, w, h);
+
+                // 上漂主题色粒子（含径向光晕 + 白色亮核）
+                for (const p of particles) {
+                    p.x += p.vx + Math.sin(t + p.pulse) * 0.05;
+                    p.y += p.vy;
+                    if (p.y < -10) { p.y = h + 10; p.x = Math.random() * w; }
+                    if (p.x < -10) p.x = w + 10;
+                    if (p.x > w + 10) p.x = -10;
+                    const a = 0.3 + Math.sin(t * 2 + p.pulse) * 0.2 + 0.3;
+                    const g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r * 6);
+                    g.addColorStop(0, `rgba(${rgb}, ${a.toFixed(2)})`);
+                    g.addColorStop(1, `rgba(${rgb}, 0)`);
+                    ctx.fillStyle = g;
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.r * 6, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.fillStyle = `rgba(255, 255, 255, ${(a * 0.85).toFixed(2)})`;
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.r * 0.6 + p.sizeJitter, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+
+                // 底部 3 道波浪（地平线）
+                for (let i = 0; i < 3; i++) {
+                    const baseY = h * 0.72 + i * 22 + Math.sin(t * 0.4 + i * 0.7) * 12;
+                    ctx.beginPath();
+                    for (let x = 0; x <= w; x += 4) {
+                        const y = baseY + Math.sin(x * 0.005 + t * 0.5 + i) * 10 + Math.cos(x * 0.013 + t * 0.3 + i) * 4;
+                        if (x === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+                    }
+                    ctx.strokeStyle = `rgba(${rgb}, ${(0.2 - i * 0.05).toFixed(2)})`;
+                    ctx.lineWidth = 1.2;
+                    ctx.stroke();
+                }
+                requestAnimationFrame(animate);
+            }
+
+            resize();
+            window.addEventListener('resize', resize);
+            requestAnimationFrame(animate);
+        }
+
+        // ====================================================
+        // 非 Hero 板块注入"山水意境"主题自适应 SVG 装饰
+        // — 远山 / 流水 / 竹 / 峰 / 卷轴 / 松 — 每板块独立意境
+        // ====================================================
+        function initLandscapeBg() {
+            const sceneries = {
+                'ai-projects': 'mountain',
+                'ai-agent': 'water',
+                'capabilities': 'bamboo',
+                'skills': 'peaks',
+                'certs': 'scroll',
+                'life': 'pine'
+            };
+            Object.entries(sceneries).forEach(([id, type]) => {
+                const sec = document.getElementById(id);
+                if (!sec || sec.dataset.sceneryAdded) return;
+                sec.dataset.sceneryAdded = '1';
+                sec.classList.add('relative', 'overflow-hidden');
+                sec.style.isolation = 'isolate';
+                const wrap = document.createElement('div');
+                wrap.className = 'absolute inset-0 pointer-events-none';
+                wrap.style.zIndex = '-1';
+                wrap.innerHTML = `
+                    <div class="absolute inset-0" style="background: linear-gradient(to bottom, rgba(var(--accent-rgb), 0.04), transparent 35%);"></div>
+                    ${renderScenery(type)}
+                `;
+                sec.prepend(wrap);
+            });
+        }
+
+        function renderScenery(type) {
+            const base = 'position:absolute;bottom:0;left:0;width:100%;color:rgb(var(--accent-rgb));pointer-events:none;';
+            switch (type) {
+                case 'mountain':
+                    return `<svg viewBox="0 0 1440 240" preserveAspectRatio="none" style="${base}height:220px;opacity:0.17">
+                        <path d="M0,180 C220,80 480,160 720,120 C960,80 1180,180 1440,140 L1440,240 L0,240 Z" fill="currentColor"/>
+                        <path d="M0,200 C240,150 520,220 800,180 C1080,140 1280,220 1440,190 L1440,240 L0,240 Z" fill="currentColor" opacity="0.5"/>
+                        <path d="M0,215 C320,180 640,235 960,210 C1280,185 1360,225 1440,215 L1440,240 L0,240 Z" fill="currentColor" opacity="0.7"/>
+                        <path d="M0,150 C200,100 500,180 800,130 C1100,80 1300,140 1440,120 L1440,180 L1440,180 L0,180 Z" fill="white" opacity="0.05"/>
+                    </svg>
+                    <div style="position:absolute;top:22%;left:0;right:0;height:60px;background:linear-gradient(to right,transparent,rgba(var(--accent-rgb),0.08),transparent);filter:blur(28px);pointer-events:none;"></div>
+                    <div style="position:absolute;top:55%;left:0;right:0;height:40px;background:linear-gradient(to right,transparent,rgba(var(--accent-rgb),0.05),transparent);filter:blur(24px);pointer-events:none;"></div>`;
+                case 'water':
+                    return `<svg viewBox="0 0 1440 220" preserveAspectRatio="none" style="${base}height:220px;opacity:0.15">
+                        <path d="M0,100 Q360,60 720,100 T1440,100 L1440,220 L0,220 Z" fill="currentColor"/>
+                        <path d="M0,130 Q360,100 720,130 T1440,130 L1440,220 L0,220 Z" fill="currentColor" opacity="0.5"/>
+                        <path d="M0,160 Q360,140 720,160 T1440,160 L1440,220 L0,220 Z" fill="currentColor" opacity="0.7"/>
+                    </svg>
+                    <div style="position:absolute;top:40%;left:0;right:0;height:30px;background:linear-gradient(to right,transparent,rgba(var(--accent-rgb),0.06),transparent);filter:blur(18px);pointer-events:none;"></div>`;
+                case 'bamboo':
+                    return `<svg viewBox="0 0 1440 280" preserveAspectRatio="none" style="${base}height:280px;opacity:0.14">
+                      <g stroke="currentColor" stroke-width="2.5" fill="none">
+                        <line x1="120" y1="280" x2="120" y2="40"/><line x1="142" y1="280" x2="142" y2="10"/>
+                        <line x1="360" y1="280" x2="360" y2="60"/><line x1="384" y1="280" x2="384" y2="20"/>
+                        <line x1="600" y1="280" x2="600" y2="40"/>
+                        <line x1="1080" y1="280" x2="1080" y2="50"/><line x1="1102" y1="280" x2="1102" y2="10"/>
+                        <line x1="1320" y1="280" x2="1320" y2="60"/>
+                      </g>
+                      <g fill="currentColor">
+                        <ellipse cx="120" cy="35" rx="3" ry="10"/><ellipse cx="142" cy="5" rx="3" ry="10"/>
+                        <ellipse cx="360" cy="55" rx="3" ry="10"/><ellipse cx="384" cy="15" rx="3" ry="10"/>
+                        <ellipse cx="600" cy="35" rx="3" ry="10"/>
+                        <ellipse cx="1080" cy="45" rx="3" ry="10"/><ellipse cx="1102" cy="5" rx="3" ry="10"/>
+                        <ellipse cx="1320" cy="55" rx="3" ry="10"/>
+                      </g>
+                      <g stroke="currentColor" stroke-width="1.5" fill="none" opacity="0.7">
+                        <path d="M120,40 Q105,30 95,20"/>
+                        <path d="M120,80 Q140,68 155,55"/>
+                        <path d="M384,30 Q400,18 410,10"/>
+                        <path d="M1080,60 Q1065,45 1055,35"/>
+                        <path d="M1102,20 Q1120,10 1132,5"/>
+                      </g>
+                    </svg>`;
+                case 'peaks':
+                    return `<svg viewBox="0 0 1440 240" preserveAspectRatio="none" style="${base}height:200px;opacity:0.17">
+                        <path d="M0,140 L200,60 L400,120 L640,40 L880,110 L1120,70 L1440,140 L1440,240 L0,240 Z" fill="currentColor"/>
+                        <path d="M0,170 L320,130 L640,170 L960,130 L1280,160 L1440,140 L1440,240 L0,240 Z" fill="currentColor" opacity="0.5"/>
+                        <path d="M0,205 L480,185 L960,205 L1440,185 L1440,240 L0,240 Z" fill="currentColor" opacity="0.7"/>
+                    </svg>
+                    <div style="position:absolute;top:25%;left:0;right:0;height:50px;background:linear-gradient(to right,transparent,rgba(var(--accent-rgb),0.07),transparent);filter:blur(22px);pointer-events:none;"></div>`;
+                case 'scroll':
+                    return `<svg viewBox="0 0 1440 200" preserveAspectRatio="none" style="${base}height:160px;opacity:0.13">
+                        <path d="M0,70 C300,50 720,110 1440,70" stroke="currentColor" stroke-width="2.5" fill="none"/>
+                        <path d="M0,100 C300,80 720,140 1440,100" stroke="currentColor" stroke-width="2" fill="none" opacity="0.7"/>
+                        <path d="M0,130 C300,110 720,170 1440,130" stroke="currentColor" stroke-width="1.5" fill="none" opacity="0.5"/>
+                        <path d="M0,160 C300,140 720,200 1440,160" stroke="currentColor" stroke-width="1.2" fill="none" opacity="0.3"/>
+                    </svg>`;
+                case 'pine':
+                    return `<svg viewBox="0 0 1440 260" preserveAspectRatio="none" style="${base}height:240px;opacity:0.18">
+                      <path d="M0,200 L1440,200 L1440,260 L0,260 Z" fill="currentColor" opacity="0.4"/>
+                      <g fill="currentColor">
+                        <g transform="translate(180,200)"><polygon points="0,0 -28,-65 28,-65"/><polygon points="0,-30 -22,-90 22,-90"/><polygon points="0,-60 -16,-115 16,-115"/></g>
+                        <g transform="translate(360,200)"><polygon points="0,0 -22,-50 22,-50"/><polygon points="0,-25 -16,-75 16,-75"/></g>
+                        <g transform="translate(580,200)"><polygon points="0,0 -28,-65 28,-65"/><polygon points="0,-30 -22,-90 22,-90"/><polygon points="0,-60 -16,-115 16,-115"/></g>
+                        <g transform="translate(960,200)"><polygon points="0,0 -28,-65 28,-65"/><polygon points="0,-30 -22,-90 22,-90"/><polygon points="0,-60 -16,-115 16,-115"/></g>
+                        <g transform="translate(1140,200)"><polygon points="0,0 -22,-50 22,-50"/><polygon points="0,-25 -16,-75 16,-75"/></g>
+                        <g transform="translate(1280,200)"><polygon points="0,0 -28,-65 28,-65"/><polygon points="0,-30 -22,-90 22,-90"/><polygon points="0,-60 -16,-115 16,-115"/></g>
+                      </g>
+                    </svg>
+                    <div style="position:absolute;top:55%;left:0;right:0;height:30px;background:linear-gradient(to right,transparent,rgba(var(--accent-rgb),0.05),transparent);filter:blur(18px);pointer-events:none;"></div>`;
+                default: return '';
+            }
+        }
+
+        function initContactCopy() {
+            const emailBtn = $('#copyEmailBtn');
+            const phoneBtn = $('#copyPhoneBtn');
+
+            const copy = (text, btn, origText) => {
+                const el = document.createElement('textarea');
+                el.value = text;
+                document.body.appendChild(el);
+                el.select();
+                document.execCommand('copy');
+                document.body.removeChild(el);
+
+                btn.innerHTML = `<i class="fa-solid fa-check"></i> 已复制！`;
+                setTimeout(() => btn.innerHTML = origText, 2000);
+            };
+
+            if (emailBtn) emailBtn.addEventListener('click', () => copy('2405225397@qq.com', emailBtn, `<i class="fa-regular fa-envelope"></i> 复制邮箱 2405225397@qq.com`));
+            if (phoneBtn) phoneBtn.addEventListener('click', () => copy('15259116632', phoneBtn, `<i class="fa-solid fa-phone"></i> 15259116632`));
+        }
+
+        function initTerminal() {
+            const toggleBtn = $('#toggleTerminalBtn');
+            const overlay = $('#terminalOverlay');
+            const closeBtn = $('#closeTerminalBtn');
+            const closeDot = $('#closeTerminalDot');
+            const input = $('#terminalInput');
+            const output = $('#terminalOutput');
+
+            if (!toggleBtn || !overlay) return;
+
+            const toggle = () => overlay.classList.toggle('hidden');
+            toggleBtn.addEventListener('click', toggle);
+            if (closeBtn) closeBtn.addEventListener('click', toggle);
+            if (closeDot) closeDot.addEventListener('click', toggle);
+
+            if (input) {
+                input.addEventListener('keydown', e => {
+                    if (e.key === 'Enter') {
+                        sounds.playClick();
+                        const cmd = input.value.trim().toLowerCase();
+                        input.value = '';
+
+                        let res = '';
+                        if (cmd === 'help') {
+                            res = '可用指令: <b class="text-amber-400">projects</b> (AI成果), <b class="text-amber-400">skills</b> (技能), <b class="text-amber-400">certs</b> (证书), <b class="text-amber-400">clear</b> (清屏)';
+                        } else if (cmd === 'projects') {
+                            res = '🛡️ 坦克大战: https://clinquant-marshmallow-f59dcb.netlify.app/';
+                        } else if (cmd === 'skills') {
+                            res = '技能: AI编程(92%), 阿里AI训练(88%), Python数据分析(85%), 科学教育(90%)';
+                        } else if (cmd === 'certs') {
+                            res = '证书: 达摩院人工智能训练师 (AIT260730185253000178) | 阿里云 Clouder 认证';
+                        } else if (cmd === 'clear') {
+                            output.innerHTML = '';
+                            return;
+                        } else {
+                            res = `未知指令: "${cmd}". 输入 'help' 查看指令。`;
+                        }
+
+                        const line = document.createElement('div');
+                        line.innerHTML = `<span class="text-slate-400">yuhan$&nbsp;${cmd}</span><br>${res}`;
+                        output.appendChild(line);
+                        output.scrollTop = output.scrollHeight;
+                    }
+                });
+            }
+        }
+
+        function initAiAgent() {
+            const sendBtn = $('#sendChatBtn');
+            const chatInput = $('#chatInput');
+            const chatMessages = $('#chatMessages');
+            const resetBtn = $('#resetChatBtn');
+
+            if (!sendBtn || !chatInput) return;
+
+            function addMessage(sender, text) {
+                const isUser = sender === 'user';
+                const msg = document.createElement('div');
+                msg.className = `flex items-start gap-3 ${isUser ? 'flex-row-reverse' : ''}`;
+                
+                msg.innerHTML = `
+                    <div class="w-8 h-8 rounded-full ${isUser ? 'bg-amber-500 text-slate-950' : 'bg-amber-500/20 border border-amber-500/30 text-amber-400'} flex items-center justify-center text-xs font-mono font-bold shrink-0">
+                        ${isUser ? 'ME' : 'AI'}
+                    </div>
+                    <div class="${isUser ? 'bg-amber-500 text-slate-950 font-medium' : 'bg-slate-800/80 text-slate-200 border border-white/5'} rounded-2xl ${isUser ? 'rounded-tr-none' : 'rounded-tl-none'} p-4 max-w-[85%] leading-relaxed text-sm">
+                        ${text}
+                    </div>
+                `;
+                chatMessages.appendChild(msg);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }
+
+            function reply(q) {
+                let answer = "陈宇涵精通 Prompt 工程与 AI 辅助 Web 编程。您可以在上面的 AI 成果展区访问他的「坦克大战」项目！";
+                const low = q.toLowerCase();
+
+                if (low.includes('坦克') || low.includes('游戏') || low.includes('作品') || low.includes('项目')) {
+                    answer = "陈宇涵独立开发了基于 Canvas 架构的 AI 成果作品——<b>坦克大战</b>：升级冲锋战车(Speed:3.6)与重装坦克(Speed:0.9)，战术层次丰富，战斗更具策略性！";
+                } else if (low.includes('认证') || low.includes('证书') || low.includes('阿里')) {
+                    answer = "陈宇涵持有<b>达摩院人工智能训练师初级证书</b>与<b>阿里云 Apsara Clouder 专项技能认证</b>，具备系统的意图标注与通义灵码编码实践能力。";
+                } else if (low.includes('教育') || low.includes('大学') || low.includes('学校')) {
+                    answer = "陈宇涵录取于<b>杭州师范大学科学教育（师范）专业</b>（2026级待入学），专注探索 STEAM 科学教育与 AI 数字化教学融合。";
+                }
+
+                setTimeout(() => {
+                    addMessage('ai', answer);
+                    sounds.playClick();
+                }, 400);
+            }
+
+            sendBtn.addEventListener('click', () => {
+                const text = chatInput.value.trim();
+                if (!text) return;
+                addMessage('user', text);
+                chatInput.value = '';
+                reply(text);
+            });
+
+            chatInput.addEventListener('keydown', e => {
+                if (e.key === 'Enter') sendBtn.click();
+            });
+
+            $$('.quick-question-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const q = btn.textContent;
+                    addMessage('user', q);
+                    reply(q);
+                });
+            });
+
+            if (resetBtn) {
+                resetBtn.addEventListener('click', () => {
+                    chatMessages.innerHTML = `
+                        <div class="flex items-start gap-3">
+                            <div class="w-8 h-8 rounded-full bg-amber-500/20 border border-amber-500/30 text-amber-400 flex items-center justify-center text-xs font-mono shrink-0">AI</div>
+                            <div class="bg-slate-800/80 rounded-2xl rounded-tl-none p-4 text-slate-200 max-w-[85%] leading-relaxed border border-white/5">
+                                对话已重置！您可以继续询问关于陈宇涵的 AI 游戏作品或能力背景。
+                            </div>
+                        </div>
+                    `;
+                });
+            }
+        }
+
+        
+                document.addEventListener('DOMContentLoaded', () => {
+            initAudioToggle();
+            initMultiThemeSystem();
+            initBgCanvas();
+            initHeroBg();
+            initCursorGlow();
+            initSplashBg();
+            initSplash();
+            initLandscapeBg();
+            initContactCopy();
+            initTerminal();
+            initAiAgent();
+
+            // 全息卡片 3D 悬浮倾斜效果
+            const hologramCard = document.getElementById('hologramCard');
+            if (hologramCard) {
+                hologramCard.addEventListener('mousemove', (e) => {
+                    const rect = hologramCard.getBoundingClientRect();
+                    const x = e.clientX - rect.left - rect.width / 2;
+                    const y = e.clientY - rect.top - rect.height / 2;
+                    hologramCard.style.transform = `perspective(1000px) rotateX(${-y / 12}deg) rotateY(${x / 12}deg) scale3d(1.02, 1.02, 1.02)`;
+                });
+                hologramCard.addEventListener('mouseleave', () => {
+                    hologramCard.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+                });
+            }
+        });
+    </script>
+</body>
+</html>
